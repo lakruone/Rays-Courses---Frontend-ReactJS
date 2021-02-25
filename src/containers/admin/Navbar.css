@@ -1,15 +1,3 @@
-
-/* <switch>
-  <Route path="/admin" component={Login} />
-  {this.state.auth ? <Route path="/admin/courses" exact component={Courses} /> : null}
-  {this.state.auth ? <Route path="/admin/add_new" exact component={NewCourse} /> : null}
-
-  <Route path="/" component={Home} />
-  <Route path="register_course" component={RegisterCourse} />
-  <Route render={() => <h1>Not found</h1>}/>
-</switch> */
-
-
 header{
   display: flex;
   background-color: #d9d9d9 ;

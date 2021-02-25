@@ -1,36 +1,21 @@
 import React, {Component} from 'react';
 import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
 
-import './cover.css';
+import Login from './admin/login/Login';
+import Home from './student/home/Home';
+
 
 class Cover extends Component {
 
+
   render(){
     return(
-      <div className="Cover">
-        <header>
-              <nav>
-                  <ul>
-                      <li><NavLink
-                          to="/posts/"
-                          exact
-                          activeClassName="my-active"
-                          activeStyle={{
-                              color: '#fa923f',
-                              textDecoration: 'underline'
-                          }}>Posts</NavLink></li>
-                      <li><NavLink to={{
-                          pathname: '/new-post',
-                          hash: '#submit',
-                          search: '?quick-submit=true'
-                      }}>New Post</NavLink></li>
-                  </ul>
-              </nav>
-          </header>
+      <div >
+        <Switch>
+          <Route path="/admin" exact component={Login} />
 
-
-          <div>Navbar</div>
-          <div>Routing for student and Admin</div>
+          <Route path="/" exact component={Home} />
+        </Switch>
 
       </div>
 
