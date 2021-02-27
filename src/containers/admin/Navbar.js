@@ -1,10 +1,18 @@
 import React, {Component} from 'react';
-import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
+import {NavLink } from 'react-router-dom';
+import AuthService from '../../auth/AuthService';
+
 
 import './Navbar.css';
 import Logo from '../img/logo.png'
 
 class Navbar extends Component {
+
+  constructor(props) {
+      super(props)
+
+      this.Auth = new AuthService();
+  }
   render () {
 
   if(this.props.auth){
@@ -17,7 +25,7 @@ class Navbar extends Component {
         <nav>
           <ul>
             <li className="hov"> <NavLink className="nav-link" to="/courses" exact> Courses</NavLink> </li>
-            <li className="hov"> <NavLink className="nav-link" to="/admin" exact>Logout</NavLink> </li>
+            <li className="hov"> <NavLink className="nav-link" to="/admin" onClick={this.Auth.logout()} exact>Logout</NavLink> </li>
 
           </ul>
         </nav>
