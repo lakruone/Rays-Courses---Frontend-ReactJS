@@ -20,7 +20,6 @@ export default class AuthService {
         })
 
         .then(res => {
-          // console.log("token from back : "+res.token);
           if(res.token){
             this.setToken(res.token) // Setting the token in localStorage
 
@@ -53,7 +52,7 @@ export default class AuthService {
     setToken(idToken) {
         // Saves user token to localStorage
         localStorage.setItem('token', idToken)
-        console.log(idToken)
+
     }
 
     getToken() {

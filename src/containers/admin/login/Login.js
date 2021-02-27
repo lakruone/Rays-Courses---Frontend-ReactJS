@@ -64,22 +64,8 @@ class Login extends Component {
 
 
          if(errors === true){
-           // axios.post('/admin/login', data)
-           //  .then(response => {
-           //    if(response.data.result===false){
-           //      // errors.credentials = "invalid credentials";
-           //      this.setState({
-           //        errors: {credentials: "Invalid credentials" }
-           //      });
-           //    }else{
-           //      console.log(response.data);
-           //      this.props.history.push('/admin/dashboard');
-           //    }
-           //  });
-
           this.Auth.login(formData.username,formData.password)
           .then(response =>{
-            console.log(response);
             if(response.result===false){
               this.setState({
                 errors: {credentials: "Invalid credentials" }
