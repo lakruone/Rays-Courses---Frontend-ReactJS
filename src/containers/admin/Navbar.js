@@ -13,6 +13,15 @@ class Navbar extends Component {
 
       this.Auth = new AuthService();
   }
+
+  logout = (e)=>{
+    e.preventDefault();
+    this.Auth.logout();
+    window.location.replace('/admin');
+
+  }
+
+
   render () {
 
   if(this.props.auth){
@@ -24,8 +33,8 @@ class Navbar extends Component {
         </div>
         <nav>
           <ul>
-            <li className="hov"> <NavLink className="nav-link" to="/courses" exact> Courses</NavLink> </li>
-            <li className="hov"> <NavLink className="nav-link" to="/admin" onClick={this.Auth.logout()} exact>Logout</NavLink> </li>
+            <li className="hov"> <NavLink className="nav-link" to="/admin/dashboard" exact> Courses</NavLink> </li>
+            <li className="hov"> <NavLink  className="nav-link" to="/admin" exact onClick={this.logout} >Logout</NavLink> </li>
 
           </ul>
         </nav>

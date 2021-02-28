@@ -1,7 +1,5 @@
 import axios from 'axios';
-import AuthService from './auth/AuthService';
 
-const Auth = new AuthService();
 const instance = axios.create({
     baseURL: 'http://localhost:5600/'
 });

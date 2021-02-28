@@ -1,0 +1,20 @@
+.Course {
+    width: 250px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    margin: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.Course:hover,
+.Course:active {
+    background-color: #C0DDF5;
+}
+
+.Description {
+    margin: 16px 0;
+    color: #333333;
+}

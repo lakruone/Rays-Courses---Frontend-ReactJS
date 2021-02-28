@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import AuthService from '../../../auth/AuthService';
 
-// import axios from '../../../axios';
 import Navbar from '../Navbar';
 import './Login.css';
 import LoginImg from '../../img/login.png';
@@ -64,9 +63,9 @@ class Login extends Component {
 
 
          if(errors === true){
-          this.Auth.login(formData.username,formData.password)
-          .then(response =>{
-            if(response.result===false){
+          this.Auth.login(formData.username, formData.password)
+          .then(response => {
+            if(response.result === false){
               this.setState({
                 errors: {credentials: "Invalid credentials" }
               });

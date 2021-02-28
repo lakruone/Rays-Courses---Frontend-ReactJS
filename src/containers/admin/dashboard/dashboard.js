@@ -3,6 +3,8 @@ import AuthService from '../../../auth/AuthService';
 import axios from '../../../axios';
 
 import Navbar from '../Navbar';
+import Course from '../../../components/course/course';
+import './dashboard.css';
 
 class Dashboard extends Component {
 
@@ -11,42 +13,71 @@ class Dashboard extends Component {
 
       this.state = {
           auth : true,
-          token: null
+          courses:[]
 
       }
       this.Auth = new AuthService();
   }
 
 
-  componentWillMount(){
-    if(this.Auth.loggedIn()===false){
-        this.props.history.replace('/admin');
-      }
-      this.setState({
-        token:this.Auth.getToken()
-      })
-  }
 
   componentDidMount(){
-    const {token} = this.state;
 
-    axios.get('/admin/courses', {
-      headers: {
-       'authorization': "bearer "+ token
+    if(this.Auth.loggedIn() === false){
+        this.props.history.replace('/admin');
+      }
+    const token =this.Auth.getToken();
+
+    if(token!=null){
+      axios.get('/admin/courses', {
+        headers: {
+         'authorization': "bearer "+ token
+       }
+      })
+       .then(res => {
+         this.setState({
+           courses:res.data.result
+         });
+         console.log(this.state.courses);
+       });
      }
-    })
-     .then(response => {
-       console.log(response + "response from axios req");
-     });
+
+  }
+
+  HandleNewCourse = (event) => {
+    this.props.history.push('/admin/add-new');
   }
 
   render (){
 
+    let   courses = this.state.courses.map( course => {
+                return (
+                    <Course
+                        key={course.course_id}
+                        name={course.course_name}
+                        uni={course.university_name}
+                        description={course.course_description}
+                        />
+                );
+            } );
+
     return(
-      <div>
+      <div >
         <Navbar auth={this.state.auth}/>
 
-        <h1>Dashboard</h1>
+        <div className="Dashboard" >
+          <h1>Dashboard</h1>
+
+            <div className="container-add-new-btn">
+              <button onClick={this.HandleNewCourse} className="add-new-btn">
+                ADD NEW COURSE
+              </button>
+            </div>
+
+          <section className="Courses">
+            {courses}
+          </section>
+        </div>
       </div>
     );
   }
