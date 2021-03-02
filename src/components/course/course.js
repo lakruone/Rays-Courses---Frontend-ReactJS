@@ -10,6 +10,13 @@ const course = (props) => (
         <div className="Info">
             <div className="Description">{props.description}</div>
         </div>
+
+        <div className="delete-course">
+          <button type="submit" className="delete-course-btn" onClick={props.clicked}>
+            DELETE COURSE
+          </button>
+        </div>
+
     </article>
 );
 

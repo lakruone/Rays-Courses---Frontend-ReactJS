@@ -38,7 +38,6 @@ class Dashboard extends Component {
          this.setState({
            courses:res.data.result
          });
-         console.log(this.state.courses);
        });
      }
 
@@ -46,6 +45,20 @@ class Dashboard extends Component {
 
   HandleNewCourse = (event) => {
     this.props.history.push('/admin/add-new');
+  }
+
+  HandleDeleteCourse = (courseId) => {
+    // console.log(courseId);
+    const token =this.Auth.getToken();
+
+    axios.delete('/admin/delete-course/'+courseId, {
+      headers: {
+        'Content-Type' : 'application/json',
+        'authorization' : 'bearer ' + token
+      }
+    }).then(res => {
+      console.log(res);
+    });
   }
 
   render (){
@@ -57,6 +70,7 @@ class Dashboard extends Component {
                         name={course.course_name}
                         uni={course.university_name}
                         description={course.course_description}
+                        clicked={()=>this.HandleDeleteCourse(course.course_id)}
                         />
                 );
             } );
