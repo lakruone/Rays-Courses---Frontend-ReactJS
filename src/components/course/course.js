@@ -11,11 +11,19 @@ const course = (props) => (
             <div className="Description">{props.description}</div>
         </div>
 
-        <div className="delete-course">
-          <button type="submit" className="delete-course-btn" onClick={props.clicked}>
-            DELETE COURSE
-          </button>
-        </div>
+        {props.auth ?
+          <div className="delete-course">
+            <button type="submit" className="delete-course-btn" onClick={props.clicked}>
+              DELETE COURSE
+            </button>
+          </div>
+          :
+          <div className="register-course">
+            <button type="submit" className="register-course-btn" onClick={props.clicked}>
+              REGISTER COURSE
+            </button>
+          </div>
+        }
 
     </article>
 );

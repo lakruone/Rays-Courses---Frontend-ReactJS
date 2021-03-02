@@ -15,7 +15,7 @@ const navbar = (props) => (
 
     <nav>
       <ul>
-          <li className="hov"> <NavLink className="nav-link" to="/" exact>Home</NavLink> </li>
+          <li className="hov"> <NavLink className="nav-link" to="/" exact>Logout</NavLink> </li>
       </ul>
     </nav>
   </header>

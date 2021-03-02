@@ -12,8 +12,8 @@ class Login extends Component {
 
       this.state = {
           auth : false,
-          formData: {}, // Contains login form data
-          errors: {}, // Contains login field errors
+          formData: {},
+          errors: {},
       }
 
       this.Auth = new AuthService();

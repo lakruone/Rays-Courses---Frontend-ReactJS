@@ -57,7 +57,8 @@ class Dashboard extends Component {
         'authorization' : 'bearer ' + token
       }
     }).then(res => {
-      console.log(res);
+      console.log(res.data);
+      window.location.reload();
     });
   }
 
@@ -71,6 +72,7 @@ class Dashboard extends Component {
                         uni={course.university_name}
                         description={course.course_description}
                         clicked={()=>this.HandleDeleteCourse(course.course_id)}
+                        auth={this.state.auth}
                         />
                 );
             } );

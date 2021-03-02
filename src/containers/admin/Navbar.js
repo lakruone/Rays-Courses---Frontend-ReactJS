@@ -34,7 +34,7 @@ class Navbar extends Component {
         <nav>
           <ul>
             <li className="hov"> <NavLink className="nav-link" to="/admin/dashboard" exact> Courses</NavLink> </li>
-            <li className="hov"> <NavLink  className="nav-link" to="/admin" exact onClick={this.logout} >Logout</NavLink> </li>
+            <li className="hov"> <NavLink  className="nav-link" to="/" exact onClick={this.logout} >Logout</NavLink> </li>
 
           </ul>
         </nav>
@@ -49,6 +49,8 @@ class Navbar extends Component {
         </div>
         <nav>
           <ul>
+            <li className="hov"> <NavLink  className="nav-link" to="/student" exact >I am a Student</NavLink> </li>
+
           </ul>
         </nav>
       </header>

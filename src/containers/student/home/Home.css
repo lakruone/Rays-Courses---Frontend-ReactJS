@@ -1,0 +1,15 @@
+.Home {
+  width: 90%;
+  margin: auto;
+}
+
+.Search {
+  margin-top: 20px;
+  width: 300px;
+  height: 40px;
+  font-size: 20px;
+  padding-left: 10px;
+  border: solid;
+  border-color: #85929E;
+  background: #E6E8E7;
+}
