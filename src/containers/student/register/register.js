@@ -64,7 +64,7 @@ class Register extends Component {
       axios.post('/student/register-course',studentDetails)
       .then( res => {
         if(res.data.msg==='success'){
-          this.props.history.push('/');
+          this.props.history.push('/student');
         }
       });
     }else{
