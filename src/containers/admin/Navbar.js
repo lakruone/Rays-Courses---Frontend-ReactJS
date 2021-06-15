@@ -1,55 +1,49 @@
-import React, {Component} from 'react';
-import {NavLink } from 'react-router-dom';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 import AuthService from '../../auth/AuthService';
 
 
 import './Navbar.css';
 import Logo from '../img/logo.png'
 
-class Navbar extends Component {
+const Navbar = (props) => {
 
-  constructor(props) {
-      super(props)
+  const Auth = new AuthService();
 
-      this.Auth = new AuthService();
-  }
-
-  logout = (e)=>{
+  const logout = (e) => {
     e.preventDefault();
-    this.Auth.logout();
+    Auth.logout();
     window.location.replace('/admin');
 
   }
 
 
-  render () {
-
-  if(this.props.auth){
+  if (props.auth) {
     return (
       <header>
         <div className="logo-container">
-          <img src={Logo} alt="logo"/>
+          <img src={Logo} alt="logo" />
           <h4>RAYS COURSES</h4>
         </div>
         <nav>
           <ul>
             <li className="hov"> <NavLink className="nav-link" to="/admin/dashboard" exact> Courses</NavLink> </li>
-            <li className="hov"> <NavLink  className="nav-link" to="/" exact onClick={this.logout} >Logout</NavLink> </li>
+            <li className="hov"> <NavLink className="nav-link" to="/" exact onClick={logout} >Logout</NavLink> </li>
 
           </ul>
         </nav>
       </header>
     );
-  }else{
+  } else {
     return (
       <header>
         <div className="logo-container">
-          <img src={Logo} alt="logo"/>
+          <img src={Logo} alt="logo" />
           <h4>RAYS COURSES</h4>
         </div>
         <nav>
           <ul>
-            <li className="hov"> <NavLink  className="nav-link" to="/student" exact >I am a Student</NavLink> </li>
+            <li className="hov"> <NavLink className="nav-link" to="/student" exact >I am a Student</NavLink> </li>
 
           </ul>
         </nav>
@@ -58,7 +52,6 @@ class Navbar extends Component {
   }
 
 
-  }
 }
 
 
