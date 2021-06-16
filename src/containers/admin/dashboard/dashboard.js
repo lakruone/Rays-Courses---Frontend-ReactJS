@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import AuthService from '../../../auth/AuthService';
 import axios from '../../../axios';
 
@@ -6,55 +6,45 @@ import Navbar from '../Navbar';
 import Course from '../../../components/course/course';
 import './dashboard.css';
 
-class Dashboard extends Component {
+const Dashboard = (props) => {
 
-  constructor(props) {
-      super(props)
+  const Auth = new AuthService();
+  const auth = true;
+  const [courses, setCourses] = useState([]);
 
-      this.state = {
-          auth : true,
-          courses:[]
+  useEffect(() => {
+    console.log("hello");
+    if (Auth.loggedIn() === false) {
+      props.history.replace('/admin');
+    }
+    const token = Auth.getToken();
 
-      }
-      this.Auth = new AuthService();
-  }
-
-
-
-  componentDidMount(){
-
-    if(this.Auth.loggedIn() === false){
-        this.props.history.replace('/admin');
-      }
-    const token =this.Auth.getToken();
-
-    if(token!=null){
+    if (token != null) {
       axios.get('/admin/courses', {
         headers: {
-         'authorization': "bearer "+ token
-       }
+          'authorization': "bearer " + token
+        }
       })
-       .then(res => {
-         this.setState({
-           courses:res.data.result
-         });
-       });
-     }
+        .then(res => {
+          setCourses(res.data.result);
+        });
+    }
 
-  }
+  }, []);
 
-  HandleNewCourse = (event) => {
+
+
+  const HandleNewCourse = (event) => {
     this.props.history.push('/admin/add-new');
   }
 
-  HandleDeleteCourse = (courseId) => {
-    // console.log(courseId);
-    const token =this.Auth.getToken();
+  const HandleDeleteCourse = (courseId) => {
+    const token = Auth.getToken();
 
-    axios.delete('/admin/delete-course/'+courseId, {
+    axios.delete('/admin/delete-course/' + courseId, {
       headers: {
-        'Content-Type' : 'application/json',
-        'authorization' : 'bearer ' + token
+        'Content-Type': 'application/json',
+        'authorization': 'bearer ' + token
       }
     }).then(res => {
       console.log(res.data);
@@ -62,42 +52,39 @@ class Dashboard extends Component {
     });
   }
 
-  render (){
 
-    let   courses = this.state.courses.map( course => {
-                return (
-                    <Course
-                        key={course.course_id}
-                        name={course.course_name}
-                        uni={course.university_name}
-                        description={course.course_description}
-                        clicked={()=>this.HandleDeleteCourse(course.course_id)}
-                        auth={this.state.auth}
-                        />
-                );
-            } );
-
-    return(
-      <div >
-        <Navbar auth={this.state.auth}/>
-
-        <div className="Dashboard" >
-          <h1>Dashboard</h1>
-
-            <div className="container-add-new-btn">
-              <button onClick={this.HandleNewCourse} className="add-new-btn">
-                ADD NEW COURSE
-              </button>
-            </div>
-
-          <section className="Courses">
-            {courses}
-          </section>
-        </div>
-      </div>
+  let coursesList = courses.map(course => {
+    return (
+      <Course
+        key={course.course_id}
+        name={course.course_name}
+        uni={course.university_name}
+        description={course.course_description}
+        clicked={() => HandleDeleteCourse(course.course_id)}
+        auth={auth}
+      />
     );
-  }
+  });
 
+  return (
+    <div >
+      <Navbar auth={auth} />
+
+      <div className="Dashboard" >
+        <h1>Dashboard</h1>
+
+        <div className="container-add-new-btn">
+          <button onClick={HandleNewCourse} className="add-new-btn">
+            ADD NEW COURSE
+          </button>
+        </div>
+
+        <section className="Courses">
+          {coursesList}
+        </section>
+      </div>
+    </div>
+  );
 }
 
 export default Dashboard;
